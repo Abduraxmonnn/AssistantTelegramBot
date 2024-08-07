@@ -1,0 +1,1 @@
+image_hello_banner_id = 'AgACAgIAAxkBAAIBGGavrGTqSwZnHAUjjj9GZ3laYOslAAJh3jEbOMGASWJ9jgJAEFbQAQADAgADeQADNQQ'
