@@ -1,1 +1,4 @@
 image_hello_banner_id = 'AgACAgIAAxkBAAIBGGavrGTqSwZnHAUjjj9GZ3laYOslAAJh3jEbOMGASWJ9jgJAEFbQAQADAgADeQADNQQ'
+end_process_animation_id = 'AAMCBAADGQEAAgK1ZrO3BAISOXIi4YQ4hr1ByM9OCgUAAigDAAIraQRTgseNcniP30wBAAdtAAM1BA'
+end_process_image_id = 'AgACAgIAAxkBAAICv2azuYr_HdH3pJZQeSbfr16l9mVkAAL64TEbfUagSYBCodJdFFwJAQADAgADeAADNQQ'
+

@@ -11,7 +11,7 @@ from app.states import UserState
 from app.buttons.reply import get_contacts
 from app.messages import MainMessages, ButtonMessages
 from app.buttons import reply as btn
-from app.utilits import delete_message_delay
+from app.utilits import delete_message_delay, login_request
 
 main_message = MainMessages()
 btn_message = ButtonMessages()
@@ -34,7 +34,8 @@ async def get_login_username(message: Message, state: FSMContext):
 
 @router.message(UserState.password)
 async def get_login_username(message: Message, state: FSMContext):
-    await state.update_data(password=message.text)
+    user = message.from_user
+    await state.update_data(password=message.text, telegram_username=user.username, user_id=user.id)
 
     asyncio.create_task(delete_message_delay(message, 3))
 
@@ -44,12 +45,16 @@ async def get_login_username(message: Message, state: FSMContext):
 
 @router.message(UserState.phone_number)
 async def get_login_username(message: Message, state: FSMContext):
-    await state.update_data(phone_number=message.contact.phone_number)
+    try:
+        await state.update_data(phone_number=message.contact.phone_number)
 
-    data = await state.get_data()
-    await state.clear()
+        data = await state.get_data()
+        response = login_request(data)
+        await state.clear()
 
-    if data['username'] == 'admin' and data['password'] == 'test':
-        await message.answer(main_message.login_success_message(), reply_markup=btn.type_monitoring)
-    else:
-        await message.answer(main_message.login_fail_message(), reply_markup=btn.login)
+        if response:
+            await message.answer(main_message.login_success_message(), reply_markup=btn.type_monitoring)
+        else:
+            await message.answer(main_message.login_fail_message(), reply_markup=btn.login)
+    except AttributeError:
+        await message.answer(main_message.invalid_phone_message(), reply_markup=get_contacts)

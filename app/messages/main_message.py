@@ -57,6 +57,14 @@ class MainMessages:
         }
         return self.message[self.language]
 
+    def invalid_phone_message(self):
+        self.message = {
+            'uz': f"Iltimos, telefon raqamini kiritish o'rniga kontaktni jo`nating.",
+            'ru': f"Пожалуйста, поделитесь контактом вместо ввода номера телефона.",
+            'en': f"Please, Share contact instead of entering a phone number."
+        }
+        return self.message[self.language]
+
     def login_username_message(self) -> str:
         self.message = {
             'uz': 'Iltimos, Login kiriting',
@@ -107,9 +115,9 @@ class MainMessages:
 
     def success_end_process_message(self) -> str:
         self.message = {
-            'uz': 'Tabriklaymiz! Endi siz Fbox orqali amalga oshirilgan to\'lovlar haqida xabar olasiz',
-            'ru': 'Поздравляем! Теперь вы будете получать уведомления о платежах, совершенных через Fbox',
-            'en': 'Congratulations! You will now be notified about payments made through Fbox'
+            'uz': '✅Tabriklaymiz! Endi siz Fbox orqali amalga oshirilgan to\'lovlar haqida xabar olasiz☺️',
+            'ru': '✅Поздравляем! Теперь вы будете получать уведомления о платежах, совершенных через Fbox☺️',
+            'en': '✅Congratulations! You will now be notified about payments made through Fbox☺️'
         }
         return self.message[self.language]
 
