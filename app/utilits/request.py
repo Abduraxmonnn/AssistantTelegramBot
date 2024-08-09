@@ -5,11 +5,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-url = os.getenv("SERVER")
-
 
 def login_request(data: dict) -> bool:
-    r = requests.post(url=url, json={**data})
+    login_url = os.getenv("LOCAL_URL_LOGIN")
+    r = requests.post(url=login_url, json={**data})
 
     if r.status_code == 200:
         return True
@@ -18,8 +17,8 @@ def login_request(data: dict) -> bool:
 
 
 def monitoring_tyype_request(data: dict) -> bool:
-    print(data)
-    r = requests.post(url=url, json={**data})
+    monitoring_url = os.getenv("LOCAL_URL_MONITORING")
+    r = requests.post(url=monitoring_url, json={**data})
 
     if r.status_code == 200:
         return True

@@ -12,3 +12,5 @@ class UserState(StatesGroup):
 class MonitoringTypeState(StatesGroup):
     inn = State()
     device_serial_number = State()
+    user_id = State()
+

@@ -38,9 +38,10 @@ async def login(message: Message, state: FSMContext):
 
 @router.message(MonitoringTypeState.device_serial_number)
 async def check_device_serial_number(message: Message, state: FSMContext):
-    await state.update_data(device_serial_number=message.text, inn=None)
+    await state.update_data(device_serial_number=message.text)
 
     data = await state.get_data()
+    data.update({'user_id': message.from_user.id})
     response = monitoring_tyype_request(data=data)
     await state.clear()
 
@@ -53,9 +54,10 @@ async def check_device_serial_number(message: Message, state: FSMContext):
 @router.message(F.text.lower().contains(main_message.ask_company_inn_message().lower()))
 @router.message(MonitoringTypeState.inn)
 async def check_inn(message: Message, state: FSMContext):
-    await state.update_data(inn=message.text, device_serial_number=None)
+    await state.update_data(inn=message.text)
 
     data = await state.get_data()
+    data.update({'user_id': message.from_user.id})
     response = monitoring_tyype_request(data=data)
     await state.clear()
 
