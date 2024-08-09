@@ -137,6 +137,14 @@ class MainMessages:
         }
         return self.message[self.language]
 
+    def user_exists_message(self) -> str:
+        self.message = {
+            'uz': 'Foydalanuvchi allaqachon mavjud.',
+            'ru': 'Пользователь уже существует.',
+            'en': 'User already exists.'
+        }
+        return self.message[self.language]
+
     def transaction_message(self, is_status: bool, data: dict, obj, date: str) -> str:
         success_status = {
             'uz': 'muvaffaqiyatli',
