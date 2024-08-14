@@ -115,9 +115,9 @@ class MainMessages:
 
     def success_end_process_message(self) -> str:
         self.message = {
-            'uz': '✅Tabriklaymiz! Endi siz Fbox orqali amalga oshirilgan to\'lovlar haqida xabar olasiz☺️',
-            'ru': '✅Поздравляем! Теперь вы будете получать уведомления о платежах, совершенных через Fbox☺️',
-            'en': '✅Congratulations! You will now be notified about payments made through Fbox☺️'
+            'uz': '🥳Tabriklaymiz! Endi siz Fbox orqali amalga oshirilgan to\'lovlar haqida xabar olasiz☺️',
+            'ru': '🥳Поздравляем! Теперь вы будете получать уведомления о платежах, совершенных через Fbox☺️',
+            'en': '🥳Congratulations! You will now be notified about payments made through Fbox☺️'
         }
         return self.message[self.language]
 
