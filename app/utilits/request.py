@@ -9,7 +9,8 @@ load_dotenv()
 def login_request(data: dict) -> bool:
     login_url = os.getenv("LOCAL_URL_LOGIN")
     r = requests.post(url=login_url, json={**data})
-
+    
+    print(r.json())
     if r.status_code == 200:
         return True
     else:

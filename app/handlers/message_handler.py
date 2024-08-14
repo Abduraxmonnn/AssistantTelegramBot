@@ -46,6 +46,7 @@ async def check_device_serial_number(message: Message, state: FSMContext):
     await state.clear()
 
     if response:
+        await message.answer_photo(photo=end_process_image_id)
         await message.answer(main_message.success_end_process_message())
     else:
         await message.answer(main_message.fail_end_process_message(), reply_markup=btn.type_monitoring)
