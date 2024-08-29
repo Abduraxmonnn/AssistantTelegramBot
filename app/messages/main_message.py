@@ -1,22 +1,3 @@
-# LOGIN_MESSAGE = {
-#     'uz': 'Ajoyib! Endi muvaffaqiyatli avtorizatsiya qilish uchun "Login" va "Parol" ni kiritishingiz kerak',
-#     'ru': 'Отлично! Теперь вам нужно ввести "Логин" и "Пароль" для успешной авторизации',
-#     'en': 'Great! Now you need to enter "Login" and "Password" for successful authorization'
-# }
-#
-# LOGIN_USERNAME_MESSAGE = {
-#     'uz': 'Iltimos, Login kiriting',
-#     'ru': 'Пожалуйста, введите Логин',
-#     'en': 'Please, enter your Login'
-# }
-#
-# LOGIN_PASSWORD_MESSAGE = {
-#     'uz': 'Iltimos, Parol kiriting',
-#     'ru': 'Пожалуйста, введите Пароль',
-#     'en': 'Please, enter your Password'
-# }
-
-
 class MainMessages:
     def __init__(self, language: str = 'ru'):
         self.language = language
@@ -142,6 +123,62 @@ class MainMessages:
             'uz': 'Foydalanuvchi allaqachon mavjud.',
             'ru': 'Пользователь уже существует.',
             'en': 'User already exists.'
+        }
+        return self.message[self.language]
+
+    def help_message(self) -> str:
+        self.message = {
+            'uz': 'FboxAssistantbot - Bot sizga telegram orqali FBOXda orqali amalga oshirilgan to\'lovlar haqida '
+                  'sizni xabardor qiladi.\n'
+                  'Siz qilshingiz kerak:\n'
+                  '1️⃣ Tizimga kirish /start\n'
+                  '2️⃣ Xabar turini tanlash\n'
+                  '☎️ To\'liq ma`lumot uchun +(99871) 256 50 09',
+            'ru': 'FboxAssistantbot - Уведомлять вас о платежах, совершенных через FBOX в telegram.\n'
+                  'Вы должны:\n'
+                  '1️⃣ Авторизоваться /start\n'
+                  '2️⃣ Выбрит тип уведомления\n'
+                  '☎️ По всем вопросам +(99871) 256 50 09',
+            'en': 'FboxAssistantbot - Notify you about payments made via FBOX in telegram.\n'
+                  'You must:\n'
+                  '1️⃣ Log in /start\n'
+                  '2️⃣ Select notification type\n'
+                  '☎️ For all questions +(99871) 256 50 09'
+        }
+        return self.message[self.language]
+
+    def user_me_message(self, username: str, is_send: bool, created_date: str, last_updated: str, company: str = None,
+                        device: str = None) -> str:
+        self.message = {
+            'uz': f"-- Foydalanuvchi haqida ma'lumot --\n\n"
+                  f"Foydalanuvchi: {username}\n"
+                  f"Bildirishnomalarni yuborish: {'✅' if is_send else '🚫'}\n\n"
+                  f"Kompaniya: {company}\n"
+                  f"Qurilma: {device}\n\n"
+                  f"Ishga tushirish sanasi: {created_date}\n"
+                  f"Hisob qaydnomasining oxirgi yangilanishi: {last_updated}",
+            'ru': f"-- Информация о пользователе --\n\n"
+                  f"Имя пользователя: {username}\n"
+                  f"Отправлять уведомления: {'✅' if is_send else '🚫'}\n\n"
+                  f"Компания: {company}\n"
+                  f"Устройство: {device}\n\n"
+                  f"Дата запуска: {created_date}\n"
+                  f"Последнее обновление аккаунта: {last_updated}",
+            'en': f"-- Information about user --\n\n"
+                  f"Username: {username}\n"
+                  f"Send Notifications: {'✅' if is_send else '🚫'}\n\n"
+                  f"Company: {company}\n"
+                  f"Device: {device}\n\n"
+                  f"Launch date: {created_date}\n"
+                  f"The last update an account: {last_updated}",
+        }
+        return self.message[self.language]
+
+    def user_not_found(self) -> str:
+        self.message = {
+            'uz': "-- Foydalanuvchi haqida ma'lumot --\n\nFoydalanuvchi topilmadi",
+            'ru': "-- Информация о пользователе --\n\nПользователь не найден",
+            'en': "-- Information about user --\n\nUser not found"
         }
         return self.message[self.language]
 
