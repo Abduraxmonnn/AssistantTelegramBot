@@ -104,9 +104,9 @@ class MainMessages:
 
     def fail_end_process_message(self) -> str:
         self.message = {
-            'uz': 'Kechirasiz! Siz taqdim etgan mos maʼlumotlarni topa olmadik. Qayta urinib koʼring!',
-            'ru': 'Извините! Мы не смогли найти соответствующие данные, предоставленные вами. Попробуйте еще раз!',
-            'en': 'Sorry! We couldn not find any matching data provided by you. Try again!'
+            'uz': 'Kechirasiz! Siz taqdim etgan mos maʼlumotlarni topa olmadik. Qaytadan urining yoki ro\'yhatdan o\'ting',
+            'ru': 'Извините! Мы не смогли найти соответствующие данные, предоставленные вами. Попробуйте еще раз или Авторизуйтесь',
+            'en': 'Sorry! We couldn not find any matching data provided by you. Try again or Login'
         }
         return self.message[self.language]
 
@@ -179,6 +179,46 @@ class MainMessages:
             'uz': "-- Foydalanuvchi haqida ma'lumot --\n\nFoydalanuvchi topilmadi",
             'ru': "-- Информация о пользователе --\n\nПользователь не найден",
             'en': "-- Information about user --\n\nUser not found"
+        }
+        return self.message[self.language]
+
+    def monitoring_type_message(self) -> str:
+        self.message = {
+            'uz': "Kuzatish turini tanlang",
+            'ru': "выберите тип наблюдения",
+            'en': "select the type of observation"
+        }
+        return self.message[self.language]
+
+    def notify_status_on_message(self) -> str:
+        self.message = {
+            'uz': 'Bildirishnoma yoqildi🔔',
+            'ru': 'Уведомление Подключено🔔',
+            'en': 'Notification Enabled🔔'
+        }
+        return self.message[self.language]
+
+    def notify_status_off_message(self) -> str:
+        self.message = {
+            'uz': 'Bildirishnoma o‘chirildi🔕',
+            'ru': 'Уведомление Отключено🔕',
+            'en': 'Notification Disabled🔕'
+        }
+        return self.message[self.language]
+
+    def error_on_notify_process_message(self) -> str:
+        self.message = {
+            'uz': 'Holatni o‘zgartirishda muammo yuz berdi',
+            'ru': 'Возникла проблема при изменении статуса',
+            'en': 'There was a problem changing the status'
+        }
+        return self.message[self.language]
+
+    def error_get_ip_address_message(self) -> str:
+        self.message = {
+            'uz': 'Foydalanuvchi topilmadi yoki ulangan qurilmalari yo\'q.',
+            'ru': 'Пользователь не найден или у него нет подключенных устройств.',
+            'en': 'The user is not found or has no connected devices.'
         }
         return self.message[self.language]
 

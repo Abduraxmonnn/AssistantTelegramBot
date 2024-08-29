@@ -6,8 +6,11 @@ import requests
 from dotenv import load_dotenv
 
 load_dotenv()
-server_url = os.getenv("SERVER_URL")
-# server_url = os.getenv("LOCAL_URL")
+# server_url = os.getenv("SERVER_URL")
+# server_url_v2 = os.getenv("SERVER_URL_V2")
+
+server_url = os.getenv("LOCAL_URL")
+server_url_v2 = os.getenv("LOCAL_URL_V2")
 
 
 def login_request(data: dict) -> bool:
@@ -57,3 +60,38 @@ def user_detail_request(user_id: int) -> Union[Dict, List]:
         except (requests.RequestException, ValueError) as e:
             print(f"Error fetching user details: {e}")
             return []
+
+
+def notify_on_off_request(user_id: int, is_send: bool) -> bool:
+    notify_url = f"{server_url}/list/change-user-status/?user_id={user_id}&is_send={is_send}"
+
+    with requests.Session() as session:
+        try:
+            r = session.get(url=notify_url)
+            r.raise_for_status()
+
+            if r.status_code == 200:
+                return True
+            else:
+                return False
+        except (requests.RequestException, ValueError) as e:
+            print(f"Error fetching change notify status: {e}")
+            return False
+
+
+def ip_address_request(user_id: int) -> Union[List, bool]:
+    ip_address_url = f"{server_url_v2}/company/devices-address/?user_id={user_id}"
+
+    with requests.Session() as session:
+        try:
+            r = session.get(url=ip_address_url)
+            r.raise_for_status()
+
+            if r.status_code == 200:
+                response = r.json()
+                return response.get('message')
+            else:
+                return False
+        except (requests.RequestException, ValueError) as e:
+            print(f"Error fetching change notify status: {e}")
+            return False

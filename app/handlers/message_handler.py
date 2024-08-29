@@ -22,6 +22,11 @@ async def get_photo_id(message: Message):
     await message.answer(f"ID: {message.photo[-1].file_id}")
 
 
+@router.message(F.text.lower().contains(btn_message.back_to_monitoring_type_message().lower()))
+async def monitoring_type(message: Message):
+    await message.answer(main_message.help_message(), reply_markup=btn.type_monitoring)
+
+
 @router.message(is_valid_monitoring_type)
 async def login(message: Message, state: FSMContext):
     msg = message.text.lower()
@@ -67,7 +72,6 @@ async def check_inn(message: Message, state: FSMContext):
         await message.answer(main_message.success_end_process_message())
     else:
         await message.answer(main_message.fail_end_process_message(), reply_markup=btn.type_monitoring)
-
 
 # @router.message()
 # async def get_photo_id(message: Message):

@@ -27,6 +27,22 @@ class ButtonMessages:
         }
         return self.message[self.language]
 
+    def notify_status_on_btn_message(self) -> str:
+        self.message = {
+            'uz': 'Bildirishnoma yoqish✅',
+            'ru': 'Подключить уведомление✅',
+            'en': 'Enable notification✅'
+        }
+        return self.message[self.language]
+
+    def notify_status_off_btn_message(self) -> str:
+        self.message = {
+            'uz': 'Bildirishnomani o‘chirish🚫',
+            'ru': 'Отключить уведомление🚫',
+            'en': 'Disable notification🚫'
+        }
+        return self.message[self.language]
+
     def send_contact_message(self) -> str:
         self.message = {
             'uz': 'Kontaktni yuboring',
@@ -40,5 +56,13 @@ class ButtonMessages:
             'uz': 'Tizimga kirish',
             'ru': 'Авторизоваться',
             'en': 'Login'
+        }
+        return self.message[self.language]
+
+    def back_to_monitoring_type_message(self) -> str:
+        self.message = {
+            'uz': 'Kuzatish turini tanlashga qaytish⬅️',
+            'ru': 'Вернуться к выбору типа наблюдения⬅️',
+            'en': 'Back to select observation type⬅️'
         }
         return self.message[self.language]
