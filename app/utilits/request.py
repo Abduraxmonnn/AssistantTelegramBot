@@ -6,11 +6,12 @@ import requests
 from dotenv import load_dotenv
 
 load_dotenv()
-# server_url = os.getenv("SERVER_URL")
-# server_url_v2 = os.getenv("SERVER_URL_V2")
+server_url = os.getenv("SERVER_URL")
+server_url_v2 = os.getenv("SERVER_URL_V2")
 
-server_url = os.getenv("LOCAL_URL")
-server_url_v2 = os.getenv("LOCAL_URL_V2")
+
+# server_url = os.getenv("LOCAL_URL")
+# server_url_v2 = os.getenv("LOCAL_URL_V2")
 
 
 def login_request(data: dict) -> bool:
@@ -89,7 +90,8 @@ def ip_address_request(user_id: int) -> Union[List, bool]:
 
             if r.status_code == 200:
                 response = r.json()
-                return response.get('message')
+                data = response.json().get('message', '')
+                return data if data else False
             else:
                 return False
         except (requests.RequestException, ValueError) as e:
