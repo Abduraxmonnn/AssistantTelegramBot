@@ -69,6 +69,6 @@ async def check_inn(message: Message, state: FSMContext):
         await message.answer(main_message.fail_end_process_message(), reply_markup=btn.type_monitoring)
 
 
-@router.message()
-async def get_photo_id(message: Message):
-    print(message.from_user)
+# @router.message()
+# async def get_photo_id(message: Message):
+#     print(message.from_user)
