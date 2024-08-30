@@ -90,7 +90,7 @@ def ip_address_request(user_id: int) -> Union[List, bool]:
 
             if r.status_code == 200:
                 response = r.json()
-                data = response.json().get('message', '')
+                data = response.get('message', '')
                 return data if data else False
             else:
                 return False
