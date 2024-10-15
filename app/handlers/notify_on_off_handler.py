@@ -21,7 +21,7 @@ async def notify_command(message: Message):
 
 @router.message(F.text.lower().contains(btn_message.notify_status_on_btn_message().lower()))
 async def notify_status_on(message: Message):
-    notify_info = notify_on_off_request(user_id=message.from_user.id, is_send=True)
+    notify_info = await notify_on_off_request(user_id=message.from_user.id, is_send=True)
     if notify_info:
         await message.answer(main_message.notify_status_on_message(), reply_markup=btn.type_monitoring)
     else:
@@ -30,7 +30,7 @@ async def notify_status_on(message: Message):
 
 @router.message(F.text.lower().contains(btn_message.notify_status_off_btn_message().lower()))
 async def notify_status_off(message: Message):
-    notify_info = notify_on_off_request(user_id=message.from_user.id, is_send=False)
+    notify_info = await notify_on_off_request(user_id=message.from_user.id, is_send=False)
     if notify_info:
         await message.answer(main_message.notify_status_off_message(), reply_markup=btn.type_monitoring)
     else:
