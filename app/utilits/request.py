@@ -24,6 +24,12 @@ async def login_request(data: dict) -> bool:
 async def monitoring_type_request(data: dict) -> bool:
     monitoring_url = f"{server_url}/monitoring/"
     async with aiohttp.ClientSession(trust_env=True) as session:
+        converted_serial_number = {
+            'device_serial_number': str(data.pop('device_serial_number')).split(' ')
+        }
+        print('--> converted_serial_number: ', converted_serial_number)
+        data.update(converted_serial_number)
+        print('--> data: ', data)
         try:
             async with session.post(url=monitoring_url, json={**data}, ssl=False) as response:
                 return response.status == 200

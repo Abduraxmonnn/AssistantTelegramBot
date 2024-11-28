@@ -94,6 +94,14 @@ class MainMessages:
         }
         return self.message[self.language]
 
+    def note_in_ask_device_serial_message(self) -> str:
+        self.message = {
+            'uz': '⚠️Agar siz bir nechta qurilma qo\'shmoqchi bo\'lsangiz, seriya raqamlari orasiga bo\'sh joy qoldirib yozing!\n\nMasalan: 123456789 987654321',
+            'ru': '⚠️Если вы хотите добавить более одного устройства, пожалуйста, пишите с пробелом между серийными номерами!\n\nНапример: 123456789 987654321',
+            'en': '⚠️If you want to add more than one device, please write with a space between the serial numbers!\n\nExample: 123456789 987654321'
+        }
+        return self.message[self.language]
+
     def success_end_process_message(self) -> str:
         self.message = {
             'uz': '🥳Tabriklaymiz! Endi siz Fbox orqali amalga oshirilgan to\'lovlar haqida xabar olasiz☺️',

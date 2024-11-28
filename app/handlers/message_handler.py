@@ -34,6 +34,7 @@ async def login(message: Message, state: FSMContext):
     if msg == btn_message.type_monitoring_device_message().lower():
         await state.set_state(MonitoringTypeState.device_serial_number)
         await message.answer(main_message.ask_device_serial_message())
+        await message.answer(main_message.note_in_ask_device_serial_message())
     elif msg == btn_message.type_monitoring_company_message().lower():
         await state.set_state(MonitoringTypeState.inn)
         await message.answer(main_message.ask_company_inn_message())

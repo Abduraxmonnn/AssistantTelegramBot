@@ -14,6 +14,8 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
 
+# TOKEN = os.getenv("TOKEN_TEST")
+
 async def main():
     bot = Bot(token=TOKEN)
     dp = Dispatcher()
