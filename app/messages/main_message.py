@@ -32,9 +32,9 @@ class MainMessages:
 
     def login_fail_message(self):
         self.message = {
-            'uz': f"Kechirasiz, maʼlumotlaringiz mos emas.",
-            'ru': f"К сожалению, ваши данные не совпадают.",
-            'en': f"Unfortunately, your details do not match."
+            'uz': f"Afsuski, sizning ma'lumotlaringiz mos kelmaydi yoki allaqachon mavjud.",
+            'ru': f"К сожалению, ваши данные не совпадают или уже существуют.",
+            'en': f"Unfortunately, your details do not match or already exist."
         }
         return self.message[self.language]
 
