@@ -4,4 +4,3 @@
 *.pyc
 __pycache__/
 *.py[cod]
-.python_version
