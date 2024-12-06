@@ -14,7 +14,7 @@ router = Router()
 
 @router.message(Command("ip_address"))
 async def ip_address_info(message: Message):
-    get_ip_address = ip_address_request(user_id=message.from_user.id)
+    get_ip_address = await ip_address_request(user_id=message.from_user.id)
 
     if isinstance(get_ip_address, list):
         data = ""

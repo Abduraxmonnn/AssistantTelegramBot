@@ -1,99 +1,80 @@
-# Python
 import os
 from typing import Union, Dict, List
-
-import requests
+import aiohttp
 from dotenv import load_dotenv
 
 load_dotenv()
 server_url = os.getenv("SERVER_URL")
 server_url_v2 = os.getenv("SERVER_URL_V2")
-
-
 # server_url = os.getenv("LOCAL_URL")
-# server_url_v2 = os.getenv("LOCAL_URL_V2")
+# server_url_v2 = os.getenv("LOCAL_URL_V1")
 
-
-def login_request(data: dict) -> bool:
-    login_url = f"{server_url}/login"
-
-    with requests.Session() as session:
+async def login_request(data: dict) -> bool:
+    login_url = f"{server_url}/login/"
+    async with aiohttp.ClientSession(trust_env=True) as session:
         try:
-            r = session.post(url=login_url, json={**data})
-            r.raise_for_status()
-
-            # print(r.json())
-            if r.status_code == 200:
-                return True
-            else:
-                return False
-        except (requests.RequestException, ValueError) as e:
+            async with session.post(url=login_url, json={**data}, ssl=False) as response:
+                response.raise_for_status()
+                return response.status == 200
+        except (aiohttp.ClientError, ValueError) as e:
             print(f"Error fetching login: {e}")
             return False
 
 
-def monitoring_tyype_request(data: dict) -> bool:
-    monitoring_url = f"{server_url}/monitoring"
-    with requests.Session() as session:
+async def monitoring_type_request(data: dict) -> bool:
+    monitoring_url = f"{server_url}/monitoring/"
+    async with aiohttp.ClientSession(trust_env=True) as session:
+        converted_serial_number = {
+            'device_serial_number': str(data.pop('device_serial_number')).split(' ')
+        }
+        print('--> converted_serial_number: ', converted_serial_number)
+        data.update(converted_serial_number)
+        print('--> data: ', data)
         try:
-            r = requests.post(url=monitoring_url, json={**data})
-
-            if r.status_code == 200:
-                return True
-            else:
-                return False
-        except (requests.RequestException, ValueError) as e:
+            async with session.post(url=monitoring_url, json={**data}, ssl=False) as response:
+                return response.status == 200
+        except (aiohttp.ClientError, ValueError) as e:
             print(f"Error fetching choose type monitoring: {e}")
             return False
 
 
-def user_detail_request(user_id: int) -> Union[Dict, List]:
-    user_detail_url = f"{server_url}/list/?search={user_id}"
-
-    with requests.Session() as session:
+async def user_detail_request(user_id: int) -> Union[Dict, List]:
+    user_detail_url = f"{server_url}/list/?search={user_id}/"
+    async with aiohttp.ClientSession(trust_env=True) as session:
         try:
-            response = session.get(url=user_detail_url)
-            response.raise_for_status()
-
-            data = response.json()
-            return data[0] if data else []
-
-        except (requests.RequestException, ValueError) as e:
+            async with session.get(url=user_detail_url, ssl=False) as response:
+                response.raise_for_status()
+                data = await response.json()
+                return data[0] if data else []
+        except (aiohttp.ClientError, ValueError) as e:
             print(f"Error fetching user details: {e}")
             return []
 
 
-def notify_on_off_request(user_id: int, is_send: bool) -> bool:
-    notify_url = f"{server_url}/list/change-user-status/?user_id={user_id}&is_send={is_send}"
-
-    with requests.Session() as session:
+async def notify_on_off_request(user_id: int, is_send: bool) -> bool:
+    notify_url = f"{server_url}/list/change-user-status/?user_id={user_id}&is_send={is_send}/"
+    async with aiohttp.ClientSession(trust_env=True) as session:
         try:
-            r = session.get(url=notify_url)
-            r.raise_for_status()
-
-            if r.status_code == 200:
-                return True
-            else:
-                return False
-        except (requests.RequestException, ValueError) as e:
+            async with session.get(url=notify_url, ssl=False) as response:
+                response.raise_for_status()
+                return response.status == 200
+        except (aiohttp.ClientError, ValueError) as e:
             print(f"Error fetching change notify status: {e}")
             return False
 
 
-def ip_address_request(user_id: int) -> Union[List, bool]:
-    ip_address_url = f"{server_url_v2}/company/devices-address/?user_id={user_id}"
-
-    with requests.Session() as session:
+async def ip_address_request(user_id: int) -> Union[List, bool]:
+    ip_address_url = f"{server_url_v2}/company/devices-address/?user_id={user_id}/"
+    async with aiohttp.ClientSession(trust_env=True) as session:
         try:
-            r = session.get(url=ip_address_url)
-            r.raise_for_status()
-
-            if r.status_code == 200:
-                response = r.json()
-                data = response.get('message', '')
-                return data if data else False
-            else:
-                return False
-        except (requests.RequestException, ValueError) as e:
-            print(f"Error fetching change notify status: {e}")
+            async with session.get(url=ip_address_url, ssl=False) as response:
+                response.raise_for_status()
+                if response.status == 200:
+                    response_json = await response.json()
+                    data = response_json.get('message', '')
+                    return data if data else False
+                else:
+                    return False
+        except (aiohttp.ClientError, ValueError) as e:
+            print(f"Error fetching IP address: {e}")
             return False

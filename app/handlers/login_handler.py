@@ -49,7 +49,7 @@ async def get_login_username(message: Message, state: FSMContext):
         await state.update_data(phone_number=message.contact.phone_number)
 
         data = await state.get_data()
-        response = login_request(data)
+        response = await login_request(data)
         await state.clear()
 
         if response:

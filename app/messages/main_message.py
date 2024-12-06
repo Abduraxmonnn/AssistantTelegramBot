@@ -32,9 +32,9 @@ class MainMessages:
 
     def login_fail_message(self):
         self.message = {
-            'uz': f"Kechirasiz, maʼlumotlaringiz mos emas.",
-            'ru': f"К сожалению, ваши данные не совпадают.",
-            'en': f"Unfortunately, your details do not match."
+            'uz': f"Afsuski, sizning ma'lumotlaringiz mos kelmaydi yoki allaqachon mavjud.",
+            'ru': f"К сожалению, ваши данные не совпадают или уже существуют.",
+            'en': f"Unfortunately, your details do not match or already exist."
         }
         return self.message[self.language]
 
@@ -91,6 +91,14 @@ class MainMessages:
             'uz': 'Iltimos, qurilmaning seriya raqamini kiriting!',
             'ru': 'Пожалуйста, введите серийный номер устройства!',
             'en': 'Please, Enter the device serial number!'
+        }
+        return self.message[self.language]
+
+    def note_in_ask_device_serial_message(self) -> str:
+        self.message = {
+            'uz': '⚠️Agar siz bir nechta qurilma qo\'shmoqchi bo\'lsangiz, seriya raqamlari orasiga bo\'sh joy qoldirib yozing!\n\nMasalan: 123456789 987654321',
+            'ru': '⚠️Если вы хотите добавить более одного устройства, пожалуйста, пишите с пробелом между серийными номерами!\n\nНапример: 123456789 987654321',
+            'en': '⚠️If you want to add more than one device, please write with a space between the serial numbers!\n\nExample: 123456789 987654321'
         }
         return self.message[self.language]
 

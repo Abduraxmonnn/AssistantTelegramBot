@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 from app.messages import MainMessages, ButtonMessages
 from app.states import MonitoringTypeState
 from app.buttons import reply as btn
-from app.utilits import monitoring_tyype_request
+from app.utilits import monitoring_type_request
 from app.utilits.message_valid import is_valid_monitoring_type
 from images.image_ids import end_process_image_id
 
@@ -34,6 +34,7 @@ async def login(message: Message, state: FSMContext):
     if msg == btn_message.type_monitoring_device_message().lower():
         await state.set_state(MonitoringTypeState.device_serial_number)
         await message.answer(main_message.ask_device_serial_message())
+        await message.answer(main_message.note_in_ask_device_serial_message())
     elif msg == btn_message.type_monitoring_company_message().lower():
         await state.set_state(MonitoringTypeState.inn)
         await message.answer(main_message.ask_company_inn_message())
@@ -47,7 +48,7 @@ async def check_device_serial_number(message: Message, state: FSMContext):
 
     data = await state.get_data()
     data.update({'user_id': message.from_user.id})
-    response = monitoring_tyype_request(data=data)
+    response = await monitoring_type_request(data=data)
     await state.clear()
 
     if response:
@@ -64,7 +65,7 @@ async def check_inn(message: Message, state: FSMContext):
 
     data = await state.get_data()
     data.update({'user_id': message.from_user.id})
-    response = monitoring_tyype_request(data=data)
+    response = await monitoring_type_request(data=data)
     await state.clear()
 
     if response:
